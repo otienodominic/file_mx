@@ -54,7 +54,7 @@ import {
         const regex = new RegExp(`${payload}`, 'gi')
         return {
           ...state,
-          searchFile: state.files.filter(file => file.patientNumber.match(regex))
+          searchFile: state.files.filter(file => file.patientName.match(regex))
         }
       case CLEAR_SEARCH:
         return {

@@ -2,18 +2,18 @@ import React, { useContext } from 'react'
 import FileContext from '../../context/fileContext/FileContext'
 
 const FileItem = ({ file }) => {
-  const { removeFile, edit_File, clearEdit, update_File } = useContext(FileContext)
+  const { removeFile, edit_File, clearEdit, updateFile } = useContext(FileContext)
   const {
       _id,
     patientNumber,  
     patientName,  
     phoneNumber,  
-    dateOfBirth,  
-    gender, 
-    visitDate, 
-    appointmentDate, 
+    // dateOfBirth,  
+    // gender, 
+    // visitDate, 
+    // appointmentDate, 
     viralLoad, 
-    checkedOutBy,
+    // checkedOutBy,
     isBooked
 } = file
 
@@ -22,15 +22,15 @@ const FileItem = ({ file }) => {
     clearEdit()
   }
   const onchange = () => {
-    update_File({ ...file, isBooked: !isBooked })
+    updateFile({ ...file, isBooked: !isBooked })
   }
 
   return (
     <div class="guest-card">
       <div class="card-head">
         <div >
-          <label className={`${isBooked && 'confirm'}`}>Booked
-            <i className={`fas fa-check-square ${isBooked && 'confirm'}`}><input type="checkbox" onChange={onchange} /> </i>
+          <label className={`${isBooked && 'book'}`}>Booked
+            <i className={`fas fa-check-square ${isBooked && 'book'}`}><input type="checkbox" onChange={onchange} /> </i>
           </label>
         </div>
         <div>
@@ -41,7 +41,7 @@ const FileItem = ({ file }) => {
       <div class="card-body">
         <h3>{patientName}</h3>
         <h2>{patientNumber}</h2>
-        <span class={'badge ' + (viralLoad === '<400 copies' ? 'green' : viralLoad === '401-900' ? 'seaGreen' : 'red')}>{viralLoad}</span>
+        <span class={'badge ' + (viralLoad === '<400 copies' ? 'green' : viralLoad === '401-999' ? 'seaGreen' : 'red')}>{viralLoad}</span>
         <div class="contact">
           <i class="fas fa-phone-alt"></i>
           <p>{phoneNumber}</p>

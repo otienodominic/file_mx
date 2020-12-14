@@ -3,9 +3,8 @@ const db = require("../models");
 const File = db.file;
 
 
-exports.SearchFile = async(req, res) => {
-   // let filePattern = new RegExp('^'+ req.body.query)
-    const foundFile = await File.find({fileNumber:{$regex : ".*"+ req.query.search +".*", $options:'1' }})
+exports.SearchFile = async(req, res) => {   
+    const foundFile = await File.find()
     try {
         res.json(foundFile)
     } catch (error) {
@@ -41,90 +40,13 @@ exports.SaveFile = async(req, res) => {
     }
 }
 
-exports.UpdateFile = async(req, res) => {
-    try {
-        const {
-            patientNumber,  patientName,  
-            phoneNumber,  dateOfBirth,  
-            gender, 
-            visitDate, 
-            appointmentDate, 
-            viralLoad,
-            isBooked
-        } = req.body
-        const {checkedOutBy} = req.user.id
-
-        // create a file object for update
-
-        const fileFields = {
-                    patientNumber,  
-                    patientName,  
-                    phoneNumber,  
-                    dateOfBirth,  
-                    gender, 
-                    visitDate, 
-                    appointmentDate, 
-                    viralLoad, 
-                    checkedOutBy,
-                    isBooked
-                }
-        // Check for the file in the database
-        let file = await File.findById(req.params.id)
-        if(!file){
-            return res.status(404).json({ msg: "File not found!"})
-        }
-        file = await File.findByIdAndUpdate(req.params.id,{$push:{fileFields}},{ new:true})
-        res.send(file)       
-    } catch (error) {
-        console.log(error)
-        res.status(500).send('Server Error')
-    }
-}
-
-exports.addViralLoad = async(req,res)=>{
-    File.findByIdAndUpdate(req.body.id,{
-        $push:{viralLoad:req.body.viralLoad}
-    },{
-        new:true
-    }).exec((err,result)=>{
-        if(err){
-            return res.status(422).json({error:err})
-        }else{
-            res.json(result)
-        }
-    })
-}
-exports.addVisitDate = async(req,res)=>{
-    File.findByIdAndUpdate(req.body.id,{
-        $push:{visitDate:req.body.visitDate}
-    },{
-        new:true
-    }).exec((err,result)=>{
-        if(err){
-            return res.status(422).json({error:err})
-        }else{
-            res.json(result)
-        }
-    })
-}
-
-exports.addAppointmentDate = async(req,res)=>{
-    File.findByIdAndUpdate(req.body.id,{
-        $push:{appointmentDate:req.body.appointmentDate, checkedOutBy:req.user}
-    },{
-        new:true
-    }).exec((err,result)=>{
-        if(err){
-            return res.status(422).json({error:err})
-        }else{
-            res.json(result)
-        }
-    })
-}
-
-exports.checkOutFile = async(req,res)=>{
-    File.findByIdAndUpdate(req.body.id,{
-        $push:{checkedOutBy:req.user.id}
+exports.UpdateFile = async(req,res)=>{
+    File.findByIdAndUpdate(req.params.id,{
+        $set:{checkedOutBy:req.user.id, 
+            viralLoad: req.body.viralLoad, 
+            visitDate: req.body.visitDate, 
+            appointmentDate: req.body.appointmentDate, 
+            isBooked: req.body.isBooked}
     },{
         new:true
     }).exec((err,result)=>{
@@ -138,11 +60,11 @@ exports.checkOutFile = async(req,res)=>{
 
 exports.DeleteFile= async(req, res) => {
     try {
-        let file =await File.findById(req.body.id)
+        let file =await File.findOne({_id:req.params.id})
         if(!file){
             res.status(404).json({msg: "File not found"})
         }
-        await File.findByIdAndRemove(req.body.id)        
+        await File.findByIdAndRemove(req.params.id)        
         res.status(200).json({msg: "File deleted Successfully"})
 
       } catch (err) {

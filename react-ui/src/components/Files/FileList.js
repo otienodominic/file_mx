@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import FileItem from '.FileItem'
+import FileItem from './FileItem'
 
 import AuthContext from '../../context/authContext/authContext'
 import FileContext from '../../context/fileContext/FileContext'
@@ -29,7 +29,7 @@ const FilesList = () => {
             classNames='item' >
             <FileItem file={file} />
           </CSSTransition>)) :
-          files.filter(file => !fileFilter || file.isconfirmed).map(file => (<CSSTransition key={file._id} timeout={300}
+          files.filter(file => !fileFilter || file.isBooked).map(file => (<CSSTransition key={file._id} timeout={300}
             classNames='item'>
             <FileItem file={file} />
           </CSSTransition>)

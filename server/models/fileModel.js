@@ -45,10 +45,10 @@ const File = mongoose.model(
       }
     ],
     appointmentDate:[{ type: Date }],
-    isBooked: {
+    isBooked: [{
       type: Boolean,
       default: false
-    }
+    }]
   }),
 );
 

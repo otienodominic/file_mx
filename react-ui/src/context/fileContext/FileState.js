@@ -1,7 +1,7 @@
 import React, { useReducer } from 'react'
 import axios from 'axios'
-import GuestContext from './FileContext';
-import guestReducer from './FileReducer';
+import FileContext from './FileContext';
+import FileReducer from './FileReducer';
 import {
     TOGGLE_FILEFILTER,
     SEARCH_FILE,
@@ -24,12 +24,13 @@ const FileState = (props) => {
     files: [],
     error: null,
   }
-  const [state, dispatch] = useReducer(guestReducer, intialState)
+  const [state, dispatch] = useReducer(FileReducer, intialState)
 
-  // get guests
+  // get Files
+
   const getFiles = async () => {
     try {
-      const res = await axios.get('/get_all_files')
+      const res = await axios.get('/api/get_all_files')
       dispatch({
         type: GET_FILES,
         payload: res.data
@@ -49,7 +50,7 @@ const FileState = (props) => {
       'Content-Type': 'application/json'
     }
     try {
-      const res = await axios.post('/create-file', file, config)
+      const res = await axios.post('/api/create-file', file, config)
       dispatch({
         type: ADD_FILE,
         payload: res.data
@@ -63,10 +64,11 @@ const FileState = (props) => {
   }
 
 
-  // remove File
+  // remove/delete File
+
   const removeFile = async (id) => {
     try {
-      await axios.delete(`'/delete-file'/${id}`)
+      await axios.delete(`/api/delete-file/${id}`)
       dispatch({
         type: REMOVE_FILE,
         payload: id
@@ -81,14 +83,14 @@ const FileState = (props) => {
 
   // update file
 
-  const update_File = async (file) => {
+  const updateFile = async (file) => {
     const config = {
       headers: {
         'Content-Type': 'application/json'
       }
     }
     try {
-      const res = await axios.put(`/guests/${file._id}`, file, config)
+      const res = await axios.put(`/api/update-file/${file._id}`, file, config)
       dispatch({
         type: UPDATE_FILE,
         payload: res.data
@@ -141,7 +143,7 @@ const FileState = (props) => {
     })
   }
   return (
-    <GuestContext.Provider value={{
+    <FileContext.Provider value={{
       files: state.files,
       fileFilter: state.fileFilter,
       searchFile: state.searchFile,
@@ -152,7 +154,7 @@ const FileState = (props) => {
       removeFile,
       edit_File,
       clearEdit,
-      update_File,
+      updateFile,
       toggleGuestFilter,
       search_File,
       clearSearchFile,
@@ -160,7 +162,7 @@ const FileState = (props) => {
       clearFiles
     }} >
       {props.children}
-    </GuestContext.Provider >
+    </FileContext.Provider >
   )
 }
 
