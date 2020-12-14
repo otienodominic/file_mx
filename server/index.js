@@ -2,7 +2,8 @@ const express = require('express');
 const path = require('path');
 const cluster = require('cluster');
 const numCPUs = require('os').cpus().length;
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
+const cors = require('cors')
 
 const isDev = process.env.NODE_ENV !== 'production';
 const PORT = process.env.PORT || 5000;
@@ -62,6 +63,13 @@ app.use('/api', Router)
   app.get('*', function(request, response) {
     response.sendFile(path.resolve(__dirname, '../react-ui/build', 'index.html'));
   });
+
+  // cors origin URL - Allow inbound traffic from origin
+corsOptions = {
+  origin: "https://file-mx.herokuapp.com",
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
 
   app.listen(PORT, function () {
     console.error(`Node ${isDev ? 'dev server' : 'cluster worker '+process.pid}: listening on port ${PORT}`);
