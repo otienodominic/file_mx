@@ -35,6 +35,7 @@ exports.SaveFile = async(req, res) => {
         });
         const savedFile = await newFile.save();
         res.json(savedFile);
+        return res.status(200).json({msg: "File added Successfully!"})
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
