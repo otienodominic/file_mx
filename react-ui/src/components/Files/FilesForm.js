@@ -1,9 +1,11 @@
 import React, { useContext, useState, useEffect } from 'react'
 import FileContext from '../../context/fileContext/FileContext'
 
-const FileForm = () => {
+
+
+const FileForm = () => {  
   const context = useContext(FileContext)
-  const { addFile, editFile, clearEdit, updateFile } = context
+  const { addFile, editFile, clearEdit, updateFile } = context  
   
   useEffect(() => {
     if (editFile !== null) {
@@ -13,7 +15,7 @@ const FileForm = () => {
         patientNumber: '', 
         patientName: '',          
         phoneNumber: '', 
-        dateOfBirth: '',        
+        dateOfBirth: new Date(),        
         gender: '',
       })
     }
@@ -67,7 +69,12 @@ const FileForm = () => {
         <input type="text" placeholder="Patient Number" name="patientNumber" value={patientNumber} onChange={onchange} required />       
         <input type="text" placeholder="Patient Name" name="patientName" value={patientName} onChange={onchange} required />   
         <input type="text" placeholder="Phone" name="phoneNumber" value={phoneNumber} onChange={onchange} required />       
-        <input type="text" placeholder="DOB" name="dateOfBirth" value={dateOfBirth} onChange={onchange} required />          
+        <br />
+        <label for="start">Date Of Birth:</label> 
+        <input type="date" placeholder="DOB" name="dateOfBirth" value={dateOfBirth} onChange={onchange} required />
+
+        
+
         <p className="options-label">
           Gender</p>
         <div className="options">
