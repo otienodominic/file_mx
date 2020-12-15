@@ -3,31 +3,37 @@ import FileContext from '../../context/fileContext/FileContext'
 
 const FileForm = () => {
   const context = useContext(FileContext)
-  const { addFile, editFile, clearEdit, update_File } = context
+  const { addFile, editFile, clearEdit, updateFile } = context
   
   useEffect(() => {
     if (editFile !== null) {
       setFile(editFile)
     } else {
       setFile({
-        patientNumber: '',           
-        phoneNumber: '',          
-        viralLoad: 'No-Results',
+        patientNumber: '', 
+        patientName: '',          
+        phoneNumber: '', 
+        dateOfBirth: '',        
+        gender: '',
       })
     }
   }, [editFile, context])
 
   const [file, setFile] = useState({
-    patientNumber: '',           
-    phoneNumber: '',          
-    viralLoad: 'No-Results',
+        patientNumber: '', 
+        patientName: '',          
+        phoneNumber: '', 
+        dateOfBirth: '',        
+        gender: '',
   })
   
   
   const { 
-        patientNumber,       
-        phoneNumber,  
-        viralLoad,
+    patientNumber, 
+    patientName,          
+    phoneNumber, 
+    dateOfBirth,        
+    gender,
     } = file
 
   const onchange = (e) => {
@@ -42,13 +48,15 @@ const FileForm = () => {
       addFile(file);
 
     } else {
-      update_File(file)
+      updateFile(file)
       clearEdit()
     }
     setFile({
-      patientNumber: '',           
-      phoneNumber: '',          
-      viralLoad: 'No-Results',
+      patientNumber: '', 
+        patientName: '',          
+        phoneNumber: '', 
+        dateOfBirth: '',        
+        gender: '',
     })
   }
   return (
@@ -56,23 +64,21 @@ const FileForm = () => {
     <div className="invite-section">
       <h1>{editFile !== null ? 'Edit Patient' : 'Register Patient'}</h1>
       <form onSubmit={onsubmit} >
-        <input type="text" placeholder="Patient Number" name="name" value={patientNumber} onChange={onchange} required />       
-        <input type="text" placeholder="Phone" name="name" value={phoneNumber} onChange={onchange} required />             
+        <input type="text" placeholder="Patient Number" name="patientNumber" value={patientNumber} onChange={onchange} required />       
+        <input type="text" placeholder="Patient Name" name="patientName" value={patientName} onChange={onchange} required />   
+        <input type="text" placeholder="Phone" name="phoneNumber" value={phoneNumber} onChange={onchange} required />       
+        <input type="text" placeholder="DOB" name="dateOfBirth" value={dateOfBirth} onChange={onchange} required />          
         <p className="options-label">
-          Viral Load</p>
+          Gender</p>
         <div className="options">
-          <label class="container">Less-400
-          <input type="radio" name="diet" value="Non-Veg" onChange={onchange} checked={viralLoad === "Less-400"} />
+          <label class="container">Male
+          <input type="radio" name="gender" value="Male" onChange={onchange} checked={gender === "Male"} />
             <span class="checkmark"></span>
           </label>
-          <label class="container">400-999
-          <input type="radio" name="diet" value="Vegan" onChange={onchange} checked={viralLoad === "400-999"} />
+          <label class="container">Female
+          <input type="radio" name="gender" value="Female" onChange={onchange} checked={gender === "Female"} />
             <span class="checkmark"></span>
-          </label>
-          <label class="container">Over-1000
-          <input type="radio" name="diet" value="Pescatarian" onChange={onchange} checked={viralLoad === "Over-1000"} />
-            <span class="checkmark"></span>
-          </label>         
+          </label>               
         </div>
         <input type="submit" value={editFile !== null ? 'Update File' : 'Add File'} className="btn" />
         {editFile !== null ? < input onClick={clearEdit} type="button" className="btn clear" value="Cancel" /> : null}
