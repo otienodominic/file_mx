@@ -76,7 +76,7 @@ const FileState = (props) => {
     } catch (err) {
       dispatch({
         type: FILES_ERROR,
-        payload: err.response.msg
+        payload: err.response.message
       })
     }
   }

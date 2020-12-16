@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Navbar from './components/layout/Navbar'
-// import Home from './components/pages/Home'
+//import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import Register from './components/pages/Register'
 import Login from './components/pages/Login'
 // import GuestState from './comtext/guestContext/GuestState'
