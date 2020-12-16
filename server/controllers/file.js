@@ -81,6 +81,7 @@ exports.DeleteFile= async(req, res) => {
             .populate('checkedOutBy', 'name')
           res.json(foundFile)
       } catch (error) {
+        res.status(500).json({ msg: 'Server Error'});
           console.log(error)
       }
   }
