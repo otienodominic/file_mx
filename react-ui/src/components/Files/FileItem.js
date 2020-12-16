@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import FileContext from '../../context/fileContext/FileContext'
+import moment from 'moment'
 
 const FileItem = ({ file }) => {
   const { removeFile, edit_File, clearEdit, updateFile } = useContext(FileContext)
@@ -8,7 +9,7 @@ const FileItem = ({ file }) => {
     patientNumber,  
     patientName,  
     phoneNumber,  
-    // dateOfBirth,  
+    dateOfBirth,  
     // gender, 
     // visitDate, 
     // appointmentDate, 
@@ -39,9 +40,10 @@ const FileItem = ({ file }) => {
         </div>
       </div>
       <div class="card-body">
-        <h3>{patientName}</h3>
-        <h2>{patientNumber}</h2>
-        <span class={'badge ' + (viralLoad === '<400 copies' ? 'green' : viralLoad === '401-999' ? 'seaGreen' : 'red')}>{viralLoad}</span>
+        <h3>Name: {patientName}</h3>
+        <h2>IPNo: {patientNumber}</h2>
+        <h3>Age: {moment().diff(moment(dateOfBirth), 'years')}</h3>
+        <span class={'badge ' + (viralLoad === '<400 copies' ? 'red' : viralLoad === '401-999' ? 'seaGreen' : 'green')}>{viralLoad}</span>
         <div class="contact">
           <i class="fas fa-phone-alt"></i>
           <p>{phoneNumber}</p>

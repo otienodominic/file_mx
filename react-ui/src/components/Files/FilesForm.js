@@ -87,7 +87,7 @@ const FileForm = () => {
             <span class="checkmark"></span>
           </label>               
         </div>
-        <input type="submit" value={editFile !== null ? 'Update File' : 'Add File'} className="btn" />
+        <input type="submit" value={editFile !== null ? 'Update File' : 'Add Patient'} className="btn" />
         {editFile !== null ? < input onClick={clearEdit} type="button" className="btn clear" value="Cancel" /> : null}
       </form>
 
