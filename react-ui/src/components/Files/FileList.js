@@ -13,6 +13,7 @@ import AuthContext from '../../context/authContext/authContext'
 import FileContext from '../../context/fileContext/FileContext'
 import moment from 'moment'
 import Button from '@material-ui/core/Button'
+
 // import Button from 'react-bootstrap/Button';
 import {useHistory, withRouter} from 'react-router-dom'
 // import { update } from '../../../../server/models/userModel';
@@ -51,21 +52,17 @@ const renderRowSubComponent = (row) => {
     clearEdit()
   }  
 
-  // const file = {
-  //   _id: '5fdc8249abc2e231304de5dc',
-  //   appointmentDate: new Date('2020-12-25'),
-  //   viralLoad: '25',
-  //   isBooked: true
-  // }
-
+  
   const weka =()=>{
     console.log(_id)
     props.history.push('/update/'+_id)
     props.history.push({
+      patientName,
       appointmentDate, 
       viralLoad,     
       isBooked
     })
+
   }
   
   return (
@@ -78,9 +75,9 @@ const renderRowSubComponent = (row) => {
           <strong>Phone:</strong>{phoneNumber} <br />
           <strong>Age: </strong>  {(moment().diff(dateOfBirth, 'years', true)).toFixed(1)} <br />
           <strong>Gender:</strong>{gender} <br />
-          <strong>Appointment Date:</strong>{appointmentDate} <br />
+          <strong>Appointment Date:</strong>{moment(Date.parse(appointmentDate)).format("MMM Do YYYY")} <br />
           <strong>Viral Load Result:</strong>{viralLoad} <br />
-          <strong>Patient Booked? :</strong>{isBooked} <br />  
+          <strong>Patient Booked? :</strong>{isBooked ? 'Yes': 'No'} <br />  
           <Button onClick={handleRemove} variant="contained" color="secondary" >Delete</Button>{'  '}
           <Button  color="primary" variant="contained" onClick={weka} >Issue Return Date</Button>    
         </CardText>
@@ -119,10 +116,10 @@ const columns = useMemo(
       accessor: 'phoneNumber',
       filter: 'equals',
     },
-    {
-      Header: 'Appointment Date',
-      accessor: 'appointmentDate',
-    },
+    // {
+    //   Header: 'Appointment Date',
+    //   accessor:'appointmentDate',
+    // },
     {
       Header: 'Latest Viral Load',
       accessor: 'viralLoad',

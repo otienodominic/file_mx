@@ -5,24 +5,30 @@ import CountFiles from '../Files/CountFiles'
 import FileForm from '../Files/FilesForm'
 import SearchFile from '../Files/searchFile'
 import FilterFile from '../Files/FilterFiles'
-
+import {useHistory} from 'react-router-dom'
 export default function Home() {
-    const { loadUser} = useContext(AuthContext)
+    const { loadUser, isAuthencated} = useContext(AuthContext)
+    const history = useHistory()
     useEffect(() => {
         loadUser()
         // eslint-disable-next-line
       }, [])
     return (
-        <div  className="app-container">
-           <div className="main">
-               <div className="filter">
-                    <FilterFile />
-                    <SearchFile/>
-               </div>
-               <FileForm />
-               <CountFiles />
-           </div>
-            <FilesList />
-        </div>
+        <>{ 
+            isAuthencated ? (
+            <div  className="app-container">
+                <div className="main">
+                        <div className="filter">
+                                <FilterFile />
+                                <SearchFile/>
+                        </div>
+                    <FileForm />
+                    <CountFiles />
+                </div>
+                    <FilesList />
+            </div>) : history.push('/login')
+
+            }
+        </>
     )
 }

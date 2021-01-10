@@ -593,3 +593,59 @@ table{
 .withButton {
   width: 100%;
 }
+
+
+/************Update patient form *****************/
+
+.update-patient-form {
+  display: grid;
+  position: relative;
+  row-gap: 20px;
+  top: 5vh;
+  left: 25vw;
+  height: 300px;
+  width: 600px;
+  box-shadow: 0 3px 11px rgba(0,0,0,0.5);  
+  grid-column-gap: 3rem;
+}
+.input{
+  position: relative;
+    left: 25%;
+    transform:translateX(-50%);
+    border: none;
+    height: 25px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.4);
+    padding: 4px 10px;
+    border-bottom: 12px;
+}
+.update-header{
+  text-align: justify;
+}
+p {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 10em;
+  margin-right: 0;
+  
+}
+.cancel-button{
+  background-color: #f44336; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+}
+.submit-button{
+  background-color: #2039c9; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  font-size: 16px;
+}

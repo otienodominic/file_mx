@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Login(props) {
   const classes = useStyles();
-  const { login, isAuthencated, error, clearErrors, loadUser } = useContext(AuthContext)
+  const { login, isAuthencated, error, clearErrors } = useContext(AuthContext)
   useEffect(() => {
     if (isAuthencated) {
       props.history.push('/')
