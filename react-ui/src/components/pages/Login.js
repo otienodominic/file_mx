@@ -144,6 +144,7 @@ export default function Login(props) {
               </Link>
             </Grid>
           </Grid>
+          {error !== null && <button className="danger" type="button"  >{error} <span onClick={() => clearErrors()}>X</span></button>}
         </form>
       </div>
       <Box mt={8}>

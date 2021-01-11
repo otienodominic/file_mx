@@ -2,12 +2,11 @@ import React, { useContext, useState } from 'react'
 import AuthContext from '../../context/authContext/authContext'
 import FileContext from '../../context/fileContext/FileContext'
 import {useHistory} from 'react-router-dom'
-export default function RecordUpdate(props) {
-    const {isAuthencated, user} = useContext(AuthContext)
+export default function RecordUpdate(props) {    
+const { updateFile, success } = useContext(FileContext)
+const {isAuthencated, user} = useContext(AuthContext)
+const history = useHistory()
 
-    const history = useHistory()
-
-const { updateFile } = useContext(FileContext)
 const [file, setFile] = useState({
   _id: props.match.params.id,
   patientName: history.location.patientName,
@@ -58,6 +57,7 @@ const onsubmit =(e)=>{
                 
                 <input type="submit" value="Submit"  className='btn'/>
                 <button onClick={() => history.push('/')} className='cancel-button'>Cancel</button>
+                {success !== null && <button className="success" type="button"  >{success} </button>}
             </form>
             ): history.push('/')
         }

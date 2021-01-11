@@ -37,7 +37,7 @@ exports.SaveFile = async(req, res) => {
         res.json(savedFile);
         return res.status(200).json({msg: "File added Successfully!"})
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ msg: "Something went wrong!" });
     }
 }
 
@@ -52,9 +52,12 @@ exports.UpdateFile = async(req,res)=>{
         new:true
     }).exec((err,result)=>{
         if(err){
-            return res.status(422).json({error:err})
+            return res.status(422).json({msg: "File not updated"})
         }else{
-            res.json(result)
+            res.json({ msg: 'Appointment Updated successfully!',
+            result,
+        
+        })
         }
     })
 }
@@ -76,12 +79,13 @@ exports.DeleteFile= async(req, res) => {
 
   exports.FindFiles= async(req, res) => {
       try {
-          const foundFile = await File.find()
+          const foundFile = await File.find({ $query: {}, $orderby: { visitDate : -1 } })
             .populate('checkedInBy', 'name')
             .populate('checkedOutBy', 'name')
+            
           res.json(foundFile)
       } catch (error) {
-        res.status(500).json({ msg: 'Server Error'});
+        res.status(500).json({ msg: 'Server Error: Cannot retrieve files'});
           console.log(error)
       }
   }

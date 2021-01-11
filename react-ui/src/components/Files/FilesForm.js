@@ -1,11 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react'
 import FileContext from '../../context/fileContext/FileContext'
 
-
-
 const FileForm = () => {  
   const context = useContext(FileContext)
-  const { addFile, editFile, clearEdit, updateFile } = context  
+  const { addFile, editFile, clearEdit, updateFile, error, clearErrors} = context  
   
   useEffect(() => {
     if (editFile !== null) {
@@ -87,8 +85,8 @@ const FileForm = () => {
             <span class="checkmark"></span>
           </label>               
         </div>
-        <input type="submit" value={editFile !== null ? 'Update File' : 'Add Patient'} className="btn" />
-        {editFile !== null ? < input onClick={clearEdit} type="button" className="btn clear" value="Cancel" /> : null}
+        <input type="submit" value={editFile !== null ? 'Update File' : 'Add Patient'} className="btn" />             
+        {error !== null && <button className="danger" type="button"  >{error} <span onClick={() => clearErrors()}>X</span></button>}
       </form>
 
     </div>

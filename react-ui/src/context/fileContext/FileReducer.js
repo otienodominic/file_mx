@@ -9,7 +9,9 @@ import {
     UPDATE_FILE,
     GET_FILES,
     FILES_ERROR,
-    CLEAR_FILES
+    CLEAR_FILES,
+    CLEAR_ERRORS,
+    
   } from '../types'
   
   export default (state, { type, payload }) => {
@@ -43,7 +45,8 @@ import {
       case UPDATE_FILE:
         return {
           ...state,
-          files: state.files.map(file => file._id === payload._id ? payload : file)
+          files: state.files.map(file => file._id === payload._id ? payload : file),
+          success: payload
         }
       case TOGGLE_FILEFILTER:
         return {
@@ -66,6 +69,11 @@ import {
           ...state,
           error: payload,
         }
+        case CLEAR_ERRORS:
+      return {
+        ...state,
+        error: null
+      }
       case CLEAR_FILES:
         return {
           ...state,

@@ -24,52 +24,52 @@ const CountFile = () => {
   }
 
 const returnTwoWeeks = () => {
-  return moment(moment().add(14, 'days').calendar()).format("MMM Do YYYY")}
+  return moment(moment().add(2, 'w').calendar()).format("MMM Do YYYY")}
 
 console.log(returnTwoWeeks())
 const returnOneMonth = () => {  
-  return moment(moment().add(30, 'days').calendar()).format("MMM Do YYYY")
+  return moment(moment().add(4, 'w').calendar()).format("MMM Do YYYY")
   }
 const returnTwoMonths = () => {  
-  return moment(moment().add(60, 'days').calendar()).format("MMM Do YYYY")
+  return moment(moment().add(8, 'w').calendar()).format("MMM Do YYYY")
   }
 const returnThreeMonths = () => {  
-  return moment(moment().add(90, 'days').calendar()).format("MMM Do YYYY")
+  return moment(moment().add(12, 'w').calendar()).format("MMM Do YYYY")
   }  
 const returnFourMonths = () => {  
-  return moment(moment().add(120, 'days').calendar()).format("MMM Do YYYY")
+  return moment(moment().add(16, 'w').calendar()).format("MMM Do YYYY")
   }
 const returnFiveMonths = () => {  
-  return moment(moment().add(150, 'days').calendar()).format("MMM Do YYYY")
+  return moment(moment().add(20, 'w').calendar()).format("MMM Do YYYY")
   } 
 const returnSixMonths = () => {  
-  return moment(moment().add(180, 'days').calendar()).format("MMM Do YYYY")
+  return moment(moment().add(24, 'w').calendar()).format("MMM Do YYYY")
   }
 
 // Clients booking list counter
 
 const two_weeks_booking = () => {
-  return files.filter(file=>  moment(Date.parse(file.appointmentDate)).format("MMM Do YYYY") === moment(moment().add(14, 'days').calendar()).format("MMM Do YYYY")).length
+  return files.filter(file=>  moment(Date.parse(file.appointmentDate)).format("MMM Do YYYY") === moment(moment().add(2, 'w').calendar()).format("MMM Do YYYY")).length
 }
 
 const one_month_booking = () => {
-  return files.filter(file=>  moment(Date.parse(file.appointmentDate)).format("MMM Do YYYY") === moment(moment().add(30, 'days').calendar()).format("MMM Do YYYY")).length
+  return files.filter(file=>  moment(Date.parse(file.appointmentDate)).format("MMM Do YYYY") === moment(moment().add(4, 'w').calendar()).format("MMM Do YYYY")).length
 }
 
 const two_months_booking = () => {
-  return files.filter(file=>  moment(Date.parse(file.appointmentDate)).format("MMM Do YYYY") === moment(moment().add(60, 'days').calendar()).format("MMM Do YYYY")).length
+  return files.filter(file=>  moment(Date.parse(file.appointmentDate)).format("MMM Do YYYY") === moment(moment().add(8, 'w').calendar()).format("MMM Do YYYY")).length
 }
 const three_months_booking = () => {
-  return files.filter(file=>  moment(Date.parse(file.appointmentDate)).format("MMM Do YYYY") === moment(moment().add(90, 'days').calendar()).format("MMM Do YYYY")).length
+  return files.filter(file=>  moment(Date.parse(file.appointmentDate)).format("MMM Do YYYY") === moment(moment().add(12, 'w').calendar()).format("MMM Do YYYY")).length
 }
 const four_months_booking = () => {
-  return files.filter(file=>  moment(Date.parse(file.appointmentDate)).format("MMM Do YYYY") === moment(moment().add(120, 'days').calendar()).format("MMM Do YYYY")).length
+  return files.filter(file=>  moment(Date.parse(file.appointmentDate)).format("MMM Do YYYY") === moment(moment().add(16, 'w').calendar()).format("MMM Do YYYY")).length
 }
 const five_months_booking = () => {
-  return files.filter(file=>  moment(Date.parse(file.appointmentDate)).format("MMM Do YYYY") === moment(moment().add(150, 'days').calendar()).format("MMM Do YYYY")).length
+  return files.filter(file=>  moment(Date.parse(file.appointmentDate)).format("MMM Do YYYY") === moment(moment().add(20, 'w').calendar()).format("MMM Do YYYY")).length
 }
 const six_months_booking = () => {
-  return files.filter(file=>  moment(Date.parse(file.appointmentDate)).format("MMM Do YYYY") === moment(moment().add(180, 'days').calendar()).format("MMM Do YYYY")).length
+  return files.filter(file=>  moment(Date.parse(file.appointmentDate)).format("MMM Do YYYY") === moment(moment().add(24, 'w').calendar()).format("MMM Do YYYY")).length
 }
   return (
     <div>
@@ -116,7 +116,11 @@ const six_months_booking = () => {
             <td>{returnSixMonths()}</td>
           </tr>
           <tr>
-          <th><strong>Total</strong></th>
+          <th><strong>Total Booked</strong></th>
+            <td><strong>{files.length}</strong></td>            
+          </tr>
+          <tr>
+          <th><strong>Total Clients</strong></th>
             <td><strong>{files.length}</strong></td>            
           </tr>
         </tbody>

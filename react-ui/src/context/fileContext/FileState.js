@@ -13,7 +13,8 @@ import {
     UPDATE_FILE,
     GET_FILES,
     FILES_ERROR,
-    CLEAR_FILES
+    CLEAR_FILES, 
+    CLEAR_ERRORS,    
 } from '../types'
 
 const FileState = (props) => {
@@ -23,6 +24,7 @@ const FileState = (props) => {
     editFile: null,
     files: [],
     error: null,
+    success: null,
   }
   const [state, dispatch] = useReducer(FileReducer, intialState)
 
@@ -35,10 +37,16 @@ const FileState = (props) => {
         type: GET_FILES,
         payload: res.data
       })
-    } catch (err) {
+    } catch (error) {
+      const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.msg) ||
+            error.msg ||
+            error.toString();
       dispatch({
         type: FILES_ERROR,
-        payload: err.response.msg
+        payload: resMessage
       })
     }
   }
@@ -55,10 +63,16 @@ const FileState = (props) => {
         type: ADD_FILE,
         payload: res.data
       })
-    } catch (err) {
+    } catch (error) {
+      const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.msg) ||
+            error.msg ||
+            error.toString();
       dispatch({
         type: FILES_ERROR,
-        payload: err.response.msg
+        payload: resMessage
       })
     }
   }
@@ -73,10 +87,16 @@ const FileState = (props) => {
         type: REMOVE_FILE,
         payload: id
       })
-    } catch (err) {
+    } catch (error) {
+      const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.msg) ||
+            error.msg ||
+            error.toString();
       dispatch({
         type: FILES_ERROR,
-        payload: err.response.message
+        payload: resMessage
       })
     }
   }
@@ -93,24 +113,32 @@ const FileState = (props) => {
       const res = await axios.put(`/api/update-file/${file._id}`, file, config)
       dispatch({
         type: UPDATE_FILE,
-        payload: res.data
+        payload: res.data.msg
       })
       getFiles()
 
-    } catch (err) {
+    } catch (error) {
+      const resMessage =
+            (error.response &&
+              error.response.data &&
+              error.response.data.msg) ||
+            error.msg ||
+            error.toString();
       dispatch({
         type: FILES_ERROR,
-        payload: err.response
+        payload: resMessage
       })
     }
   }
 
   //toggle isconfirmed
-  const toggleGuestFilter = () => {
+  const toggleFileFilter = () => {
     dispatch({
       type: TOGGLE_FILEFILTER
     })
   }
+   // Clear Errors
+   const clearErrors = () => dispatch({ type: CLEAR_ERRORS });
 
   // Search File
   const search_File = (file) => {
@@ -149,17 +177,19 @@ const FileState = (props) => {
       searchFile: state.searchFile,
       editFile: state.editFile,
       error: state.error,
+      success: state.success,
       loading: state.loading,
       addFile,
       removeFile,
       edit_File,
       clearEdit,
       updateFile,
-      toggleGuestFilter,
+      toggleFileFilter,
       search_File,
       clearSearchFile,
       getFiles,
-      clearFiles
+      clearFiles,
+      clearErrors
     }} >
       {props.children}
     </FileContext.Provider >
