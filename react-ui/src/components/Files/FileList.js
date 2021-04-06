@@ -55,6 +55,7 @@ const renderRowSubComponent = (row) => {
   
   const weka =()=>{
     console.log(_id)
+    console.log(isBooked)
     props.history.push('/update/'+_id)
     props.history.push({
       patientName,
@@ -66,18 +67,19 @@ const renderRowSubComponent = (row) => {
   }
   
   return (
-    <Card style={{ width: '30rem', margin: '0 auto'  }}>        
+    <Card style={{ width: '30rem', margin: '0 auto', textAlign: 'left',  }}>        
       <CardBody>
         <CardTitle>
-        <strong>Patient Name: </strong> {patientName} <br />
+        
         </CardTitle>
-        <CardText>          
-          <strong>Phone:</strong>{phoneNumber} <br />
-          <strong>Age: </strong>  {(moment().diff(dateOfBirth, 'years', true)).toFixed(1)} <br />
-          <strong>Gender:</strong>{gender} <br />
-          <strong>Appointment Date:</strong>{moment(Date.parse(appointmentDate)).format("MMM Do YYYY")} <br />
-          <strong>Viral Load Result:</strong>{viralLoad} <br />
-          <strong>Patient Booked? :</strong>{isBooked ? 'Yes': 'No'} <br />  
+        <CardText >  
+        <strong>Patient Name:   </strong> {patientName} <br />        
+          <strong>Phone:  </strong>{phoneNumber} <br />
+          <strong>Age:  </strong>  {(moment().diff(dateOfBirth, 'years', true)).toFixed(1)} <br />
+          <strong>Gender:   </strong>{gender} <br />
+          <strong>Appointment Date:   </strong>{moment(Date.parse(appointmentDate)).format("MMM Do YYYY")} <br />
+          <strong>Viral Load Result:   </strong>{viralLoad} <br />
+          <strong>Patient Booked?:    </strong>{isBooked ? 'Yes': 'No'} <br />  
           <Button onClick={handleRemove} variant="contained" color="secondary" >Delete</Button>{'  '}
           <Button  color="primary" variant="contained" onClick={weka} >Issue Return Date</Button>    
         </CardText>

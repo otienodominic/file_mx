@@ -31,7 +31,7 @@ if (!isDev && cluster.isMaster) {
 } else {
   const app = express();
 
-  app.use(bodyParser.json()) // for parsing application/json
+app.use(bodyParser.json()) // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true }))
 
   // Priority serve any static files.

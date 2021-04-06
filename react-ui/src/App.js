@@ -11,6 +11,7 @@ import setAuthToken from './utils/setAuthToken';
 import PrivateRoute from './components/routing/PrivateRoute';
 import Home from './components/pages/Home'
 import UpdateFile from './components/pages/UpdateFile'
+// import card from './components/Files/card'
 
 
 if (localStorage.token) {
@@ -31,7 +32,8 @@ function App() {
             <PrivateRoute exact path='/' component={Home} />
             <PrivateRoute exact path='/update/:id' component={UpdateFile}/>
               <Route exact path='/register' component={Register} />
-              <Route exact path='/login' component={Login} />              
+              <Route exact path='/login' component={Login} /> 
+              {/* <Route exact path='/card' component={card} />             */}
             </Switch>
           </div>
         </Router>

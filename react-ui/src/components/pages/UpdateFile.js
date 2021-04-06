@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import AuthContext from '../../context/authContext/authContext'
 import FileContext from '../../context/fileContext/FileContext'
 import {useHistory} from 'react-router-dom'
+import moment from 'moment'
 export default function RecordUpdate(props) {    
 const { updateFile, success } = useContext(FileContext)
 const {isAuthencated, user} = useContext(AuthContext)
@@ -16,21 +17,23 @@ const [file, setFile] = useState({
 })
 
 
-const onchange = (e) => {
+const onchange = (e) => {  
   setFile({
     ...file,
-    [e.target.name]: e.target.value
+    [e.target.name]: e.target.value,
+    isBooked: true      
   })
+  
 }
 
 const onsubmit =(e)=>{
   e.preventDefault()
   updateFile(file)
+  
   console.log(file.isBooked)
   setFile({
     viralLoad: '',
   appointmentDate: '',
-  isBooked: ''
   
   })
 }
@@ -50,7 +53,7 @@ const onsubmit =(e)=>{
                 </label>             
                 
                 <label className='input-labels'>  
-                    Latest Viral Load Result:     
+                   Batch Number:     
                     <input type="text" className='input' name="viralLoad" placeholder='Latest Viral Load' value={file.viralLoad} onChange={onchange} />
                 </label> 
                 

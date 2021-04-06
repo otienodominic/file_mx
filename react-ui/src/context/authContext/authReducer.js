@@ -37,7 +37,7 @@ import {
         return {
           ...state,
           token: null,
-          isAuthencated: null,
+          isAuthencated: false,
           user: null,
           loading: false,
           error: payload

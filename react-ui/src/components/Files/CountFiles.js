@@ -121,7 +121,7 @@ const six_months_booking = () => {
           </tr>
           <tr>
           <th><strong>Total Clients</strong></th>
-            <td><strong>{files.length}</strong></td>            
+            <td><strong>{booked}</strong></td>            
           </tr>
         </tbody>
       </table>
