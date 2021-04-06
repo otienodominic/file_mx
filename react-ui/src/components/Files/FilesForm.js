@@ -15,6 +15,7 @@ const FileForm = () => {
         phoneNumber: '', 
         dateOfBirth: new Date(),        
         gender: '',
+        viralLoad:'',
       })
     }
   }, [editFile, context])
@@ -25,6 +26,7 @@ const FileForm = () => {
         phoneNumber: '', 
         dateOfBirth: '',        
         gender: '',
+        viralLoad: '',
   })
   
   
@@ -34,6 +36,7 @@ const FileForm = () => {
     phoneNumber, 
     dateOfBirth,        
     gender,
+    viralLoad,
     } = file
 
   const onchange = (e) => {
@@ -57,6 +60,7 @@ const FileForm = () => {
         phoneNumber: '', 
         dateOfBirth: '',        
         gender: '',
+        viralLoad: '',
     })
   }
   return (
@@ -66,7 +70,9 @@ const FileForm = () => {
       <form onSubmit={onsubmit} >
         <input type="text" placeholder="Patient Number" name="patientNumber" value={patientNumber} onChange={onchange} required />       
         <input type="text" placeholder="Patient Name" name="patientName" value={patientName} onChange={onchange} required />   
-        <input type="text" placeholder="Phone" name="phoneNumber" value={phoneNumber} onChange={onchange} required />       
+        <input type="text" placeholder="Phone" name="phoneNumber" value={phoneNumber} onChange={onchange} required />  
+        <input type="text" placeholder='Batch Number' name="viralLoad"  value={viralLoad} onChange={onchange} />
+                       
         <br />
         <label for="start">Date Of Birth:</label> 
         <input type="date" placeholder="DOB" name="dateOfBirth" value={dateOfBirth} onChange={onchange} required />

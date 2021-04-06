@@ -26,7 +26,7 @@ const File = mongoose.model(
     }, 
     viralLoad: [{
       type: String,
-      default: 'No-Results'
+      required: true
     }], 
     checkedInBy: 
       [{

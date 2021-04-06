@@ -18,14 +18,16 @@ export default function Home() {
             isAuthencated ? (
             <div  className="app-container">
                 <div className="main">
-                        <div className="filter">
+                        {/* <div className="filter">
                                 <FilterFile />
                                 <SearchFile/>
-                        </div>
+                        </div> */}
                     <FileForm />
-                    <CountFiles />
-                </div>
+                    {/* <CountFiles /> */}
                     <FilesList />
+
+                </div>
+                   
             </div>) : history.push('/login')
 
             }

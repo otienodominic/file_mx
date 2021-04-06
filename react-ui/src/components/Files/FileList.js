@@ -123,7 +123,7 @@ const columns = useMemo(
     //   accessor:'appointmentDate',
     // },
     {
-      Header: 'Latest Viral Load',
+      Header: 'Batch Number',
       accessor: 'viralLoad',
     },      
   ],
