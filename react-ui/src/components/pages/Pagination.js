@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import AuthContext from '../../context/authContext/authContext'
 import FileContext from '../../context/fileContext/FileContext'
 import moment from 'moment'
+import {withRouter} from 'react-router-dom'
 
 
 
@@ -291,7 +292,7 @@ function FilterTableComponent(props) {
         const weka =()=>{
           console.log(_id)
           console.log(isBooked)
-          props.history.push('/update/'+_id)
+          props.history.push('/update/'+_id)          
           props.history.push({
             patientName,
             appointmentDate, 
@@ -308,10 +309,11 @@ function FilterTableComponent(props) {
               
               </CardTitle>
               <CardText >
-                <strong>Patient Name:  </strong>{patientName} <br />          
+                <strong>Patient Name:  </strong>{patientName} <br />
+                <strong>Phone Number:  </strong>{phoneNumber} <br />           
                 <strong>Age:  </strong>  {dateOfBirth ?  (moment().diff(dateOfBirth, 'years', true)).toFixed(1): age} <br />
                 <strong>Gender:   </strong>{gender} <br />
-                {/* <strong>Appointment Date:   </strong>{moment(Date.parse(appointmentDate)).format("MMM Do YYYY")} <br /> */}
+                <strong>Appointment Date:   </strong>{moment(Date.parse(appointmentDate)).format("MMM Do YYYY")} <br />
                 <strong>Batch Number:   </strong>{viralLoad} <br />
                  <br />  
                 <Button onClick={handleRemove} variant="contained" color="secondary" >Delete</Button>{'  '}
@@ -363,4 +365,4 @@ function FilterTableComponent(props) {
     )
 }
 
-export default FilterTableComponent;
+export default withRouter(FilterTableComponent);

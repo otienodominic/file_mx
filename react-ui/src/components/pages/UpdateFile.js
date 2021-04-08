@@ -5,7 +5,7 @@ import {useHistory} from 'react-router-dom'
 import moment from 'moment'
 export default function RecordUpdate(props) {    
 const { updateFile, success } = useContext(FileContext)
-const {isAuthencated, user} = useContext(AuthContext)
+const {isAuthencated, user} = useContext(AuthContext) 
 const history = useHistory()
 
 const [file, setFile] = useState({

@@ -71,7 +71,7 @@ const FileForm = () => {
       <form onSubmit={onsubmit} >
         <input type="text" placeholder="Patient Number" name="patientNumber" value={patientNumber} onChange={onchange} required />       
         <input type="text" placeholder="Patient Name" name="patientName" value={patientName} onChange={onchange} required />   
-        {/* <input type="text" placeholder="Phone" name="phoneNumber" value={phoneNumber} onChange={onchange} required />   */}
+        <input type="text" placeholder="Phone" name="phoneNumber" value={phoneNumber} onChange={onchange} required />  
         <input type="text" placeholder='Batch Number' name="viralLoad"  value={viralLoad} onChange={onchange} />  
         <input type="text" placeholder="Age in years" name="age" value={age} onChange={onchange} required />        
 
