@@ -14,7 +14,7 @@ exports.SearchFile = async(req, res) => {
 
 exports.SaveFile = async(req, res) => {    
     try {
-        const {patientNumber,  patientName,  phoneNumber,  dateOfBirth,  gender, viralLoad} = req.body
+        const {patientNumber,  patientName,  phoneNumber,  age,  gender, viralLoad} = req.body
         const checkedInBy = req.user.id
         //validate
 
@@ -29,7 +29,7 @@ exports.SaveFile = async(req, res) => {
             patientNumber,  
             patientName,  
             phoneNumber,  
-            dateOfBirth,  
+            age,  
             gender,
             checkedInBy,
             viralLoad  

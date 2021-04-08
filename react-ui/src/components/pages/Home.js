@@ -5,6 +5,7 @@ import CountFiles from '../Files/CountFiles'
 import FileForm from '../Files/FilesForm'
 import SearchFile from '../Files/searchFile'
 import FilterFile from '../Files/FilterFiles'
+import Pagination from './Pagination'
 import {useHistory} from 'react-router-dom'
 export default function Home() {
     const { loadUser, isAuthencated} = useContext(AuthContext)
@@ -17,15 +18,11 @@ export default function Home() {
         <>{ 
             isAuthencated ? (
             <div  className="app-container">
-                <div className="main">
-                        {/* <div className="filter">
-                                <FilterFile />
-                                <SearchFile/>
-                        </div> */}
-                    <FileForm />
-                    {/* <CountFiles /> */}
+                <div className='one'>                        
+                    <FileForm />  
+                </div>
+                <div className= 'two'>
                     <FilesList />
-
                 </div>
                    
             </div>) : history.push('/login')

@@ -72,14 +72,12 @@ const renderRowSubComponent = (row) => {
         <CardTitle>
         
         </CardTitle>
-        <CardText >  
-        <strong>Patient Name:   </strong> {patientName} <br />        
-          <strong>Phone:  </strong>{phoneNumber} <br />
+        <CardText >          
           <strong>Age:  </strong>  {(moment().diff(dateOfBirth, 'years', true)).toFixed(1)} <br />
           <strong>Gender:   </strong>{gender} <br />
-          <strong>Appointment Date:   </strong>{moment(Date.parse(appointmentDate)).format("MMM Do YYYY")} <br />
+          {/* <strong>Appointment Date:   </strong>{moment(Date.parse(appointmentDate)).format("MMM Do YYYY")} <br /> */}
           <strong>Viral Load Result:   </strong>{viralLoad} <br />
-          <strong>Patient Booked?:    </strong>{isBooked ? 'Yes': 'No'} <br />  
+           <br />  
           <Button onClick={handleRemove} variant="contained" color="secondary" >Delete</Button>{'  '}
           <Button  color="primary" variant="contained" onClick={weka} >Issue Return Date</Button>    
         </CardText>
@@ -102,26 +100,15 @@ const columns = useMemo(
     {
       Header: 'Patient Number',
       accessor: 'patientNumber',
-      disableSortBy: true,
-      Filter: SelectColumnFilter,
-      filter: 'equals',
     },
     {
       Header: 'Patient Name',
-      accessor: 'patientName',
-      disableSortBy: true,
-      Filter: SelectColumnFilter,
-      filter: 'equals',
+      accessor: 'patientName',      
     },
     {
       Header: 'Phone Number',
-      accessor: 'phoneNumber',
-      filter: 'equals',
-    },
-    // {
-    //   Header: 'Appointment Date',
-    //   accessor:'appointmentDate',
-    // },
+      accessor: 'phoneNumber',      
+    },    
     {
       Header: 'Batch Number',
       accessor: 'viralLoad',

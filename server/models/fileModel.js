@@ -14,10 +14,14 @@ const File = mongoose.model(
     },
     phoneNumber: {
       type: Number,
-      required: true
+      required: false
     }, 
-    dateOfBirth: {
-      type: Date, 
+    // dateOfBirth: {
+    //   type: Date, 
+    //   required: false
+    // },
+    age: {
+      type: Number, 
       required: true
     },
     gender: {

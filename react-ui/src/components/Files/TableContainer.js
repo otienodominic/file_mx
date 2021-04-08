@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useMemo } from 'react';
 import {
   useTable,
   useSortBy,
@@ -7,9 +7,34 @@ import {
   usePagination,
 } from 'react-table';
 import { Table, Row, Col, Button, Input, CustomInput } from 'reactstrap';
-import { Filter, DefaultColumnFilter } from './Filters';
+import { Filter  } from './Filters';
+
+ const DefaultColumnFilter = ({
+  column: {
+    filterValue,
+    setFilter,
+    preFilteredRows: { length },
+  },
+}) => {
+  return (
+    <Input
+      value={filterValue || ''}
+      onChange={(e) => {
+        setFilter(e.target.value || undefined);
+      }}
+      placeholder={`Search (${length}) ...`}
+    />
+  );
+};
 
 const TableContainer = ({ columns, data, renderRowSubComponent }) => {
+  const defaultColumn = useMemo(
+    () => ({
+        // Default Filter UI
+        Filter: DefaultColumnFilter,
+    }),
+    []
+)
   const {
     getTableProps,
     getTableBodyProps,
@@ -30,7 +55,7 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
     {
       columns,
       data,
-      defaultColumn: { Filter: DefaultColumnFilter },
+      defaultColumn,
       initialState: { pageIndex: 0, pageSize: 10 },
     },
     useFilters,
@@ -62,7 +87,7 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
                 <th {...column.getHeaderProps()}>
                   <div {...column.getSortByToggleProps()}>
                     {column.render('Header')}
-                    {generateSortingIndicator(column)}
+                    {/* {generateSortingIndicator(column)} */}
                   </div>
                   <Filter column={column} />
                 </th>

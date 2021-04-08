@@ -13,7 +13,8 @@ const FileForm = () => {
         patientNumber: '', 
         patientName: '',          
         phoneNumber: '', 
-        dateOfBirth: new Date(),        
+        // dateOfBirth: new Date(),  
+        age: '',      
         gender: '',
         viralLoad:'',
       })
@@ -24,7 +25,7 @@ const FileForm = () => {
         patientNumber: '', 
         patientName: '',          
         phoneNumber: '', 
-        dateOfBirth: '',        
+        age: '',        
         gender: '',
         viralLoad: '',
   })
@@ -34,7 +35,7 @@ const FileForm = () => {
     patientNumber, 
     patientName,          
     phoneNumber, 
-    dateOfBirth,        
+    age,        
     gender,
     viralLoad,
     } = file
@@ -58,7 +59,7 @@ const FileForm = () => {
       patientNumber: '', 
         patientName: '',          
         phoneNumber: '', 
-        dateOfBirth: '',        
+        age: '',        
         gender: '',
         viralLoad: '',
     })
@@ -66,21 +67,15 @@ const FileForm = () => {
   return (
 
     <div className="invite-section">
-      <h1>{editFile !== null ? 'Edit Patient' : 'Register Patient'}</h1>
+      <h1>Register Patient</h1>
       <form onSubmit={onsubmit} >
         <input type="text" placeholder="Patient Number" name="patientNumber" value={patientNumber} onChange={onchange} required />       
         <input type="text" placeholder="Patient Name" name="patientName" value={patientName} onChange={onchange} required />   
-        <input type="text" placeholder="Phone" name="phoneNumber" value={phoneNumber} onChange={onchange} required />  
-        <input type="text" placeholder='Batch Number' name="viralLoad"  value={viralLoad} onChange={onchange} />
-                       
-        <br />
-        <label for="start">Date Of Birth:</label> 
-        <input type="date" placeholder="DOB" name="dateOfBirth" value={dateOfBirth} onChange={onchange} required />
+        {/* <input type="text" placeholder="Phone" name="phoneNumber" value={phoneNumber} onChange={onchange} required />   */}
+        <input type="text" placeholder='Batch Number' name="viralLoad"  value={viralLoad} onChange={onchange} />  
+        <input type="text" placeholder="Age in years" name="age" value={age} onChange={onchange} required />        
 
-        
-
-        <p className="options-label">
-          Gender</p>
+        <div className="options-label">Gender</div>
         <div className="options">
           <label class="container">Male
           <input type="radio" name="gender" value="Male" onChange={onchange} checked={gender === "Male"} />
@@ -91,7 +86,7 @@ const FileForm = () => {
             <span class="checkmark"></span>
           </label>               
         </div>
-        <input type="submit" value={editFile !== null ? 'Update File' : 'Add Patient'} className="btn" />             
+        <input type="submit" value='Add Patient' className="btn" />             
         {error !== null && <button className="danger" type="button"  >{error} <span onClick={() => clearErrors()}>X</span></button>}
       </form>
 
