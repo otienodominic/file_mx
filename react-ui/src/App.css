@@ -69,15 +69,18 @@ a:hover {
 .app-container {
   max-width: 90rem;
   margin: auto;
+  padding-top: 1px;
 
 }
 .one{
   width: 25%;
   float: left;
+  padding-top: 1px;
 }
 
 .two{
   margin-left: 27%;
+  padding-top: 1px;
 }
 
 .main {
