@@ -41,7 +41,8 @@ const renderRowSubComponent = (row) => {
     _id,       
     patientName,  
     phoneNumber,  
-    dateOfBirth,  
+    dateOfBirth, 
+    age, 
     gender,        
     appointmentDate, 
     viralLoad,     
@@ -72,11 +73,12 @@ const renderRowSubComponent = (row) => {
         <CardTitle>
         
         </CardTitle>
-        <CardText >          
-          <strong>Age:  </strong>  {(moment().diff(dateOfBirth, 'years', true)).toFixed(1)} <br />
+        <CardText >
+          <strong>Patient Name:  </strong>{patientName} <br />          
+          <strong>Age:  </strong>  {dateOfBirth ?  (moment().diff(dateOfBirth, 'years', true)).toFixed(1): age} <br />
           <strong>Gender:   </strong>{gender} <br />
           {/* <strong>Appointment Date:   </strong>{moment(Date.parse(appointmentDate)).format("MMM Do YYYY")} <br /> */}
-          <strong>Viral Load Result:   </strong>{viralLoad} <br />
+          <strong>Batch Number:   </strong>{viralLoad} <br />
            <br />  
           <Button onClick={handleRemove} variant="contained" color="secondary" >Delete</Button>{'  '}
           <Button  color="primary" variant="contained" onClick={weka} >Issue Return Date</Button>    
@@ -106,8 +108,8 @@ const columns = useMemo(
       accessor: 'patientName',      
     },
     {
-      Header: 'Phone Number',
-      accessor: 'phoneNumber',      
+      Header: 'Age',
+      accessor: 'age',      
     },    
     {
       Header: 'Batch Number',

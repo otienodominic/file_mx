@@ -5,9 +5,39 @@ import {
   useFilters,
   useExpanded,
   usePagination,
+  useGlobalFilter, 
+  useAsyncDebounce
 } from 'react-table';
 import { Table, Row, Col, Button, Input, CustomInput } from 'reactstrap';
 import { Filter  } from './Filters';
+
+// Define a default UI for filtering
+function GlobalFilter({
+  preGlobalFilteredRows,
+  globalFilter,
+  setGlobalFilter,
+}) {
+  // const count = preGlobalFilteredRows.length
+  const [value, setValue] = React.useState(globalFilter)
+  const onChange = useAsyncDebounce(value => {
+      setGlobalFilter(value || undefined)
+  }, 200)
+
+  return (
+      <span>
+          Search:{' '}
+          <input
+              className="form-control"
+              value={value || ""}
+              onChange={e => {
+                  setValue(e.target.value);
+                  onChange(e.target.value);
+              }}
+              placeholder={` records...`}
+          />
+      </span>
+  )
+}
 
  const DefaultColumnFilter = ({
   column: {
@@ -39,11 +69,15 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
     getTableProps,
     getTableBodyProps,
     headerGroups,
+    rows,
     page,
     prepareRow,
     visibleColumns,
     canPreviousPage,
     canNextPage,
+    preGlobalFilteredRows,
+    setGlobalFilter,
+    globalFilter,
     pageOptions,
     pageCount,
     gotoPage,
@@ -79,6 +113,11 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
 
   return (
     <Fragment>
+      <GlobalFilter
+                preGlobalFilteredRows={preGlobalFilteredRows}
+                globalFilter={globalFilter}
+                setGlobalFilter={setGlobalFilter}
+            />
       <Table bordered hover {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -97,7 +136,7 @@ const TableContainer = ({ columns, data, renderRowSubComponent }) => {
         </thead>
 
         <tbody {...getTableBodyProps()}>
-          {page.map((row) => {
+          {rows.map((row, i) => {
             prepareRow(row);
             return (
               <Fragment key={row.getRowProps().key}>

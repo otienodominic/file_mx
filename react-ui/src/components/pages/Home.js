@@ -22,7 +22,7 @@ export default function Home() {
                     <FileForm />  
                 </div>
                 <div className= 'two'>
-                    <FilesList />
+                    <Pagination />
                 </div>
                    
             </div>) : history.push('/login')
