@@ -1,33 +1,28 @@
-import React, { useContext, useEffect } from 'react'
-import AuthContext from '../../context/authContext/authContext'
-import FilesList from '../Files/FileList'
-import CountFiles from '../Files/CountFiles'
-import FileForm from '../Files/FilesForm'
-import SearchFile from '../Files/searchFile'
-import FilterFile from '../Files/FilterFiles'
-import Pagination from './Pagination'
-import {useHistory} from 'react-router-dom'
-export default function Home() {
-    const { loadUser, isAuthencated} = useContext(AuthContext)
-    const history = useHistory()
-    useEffect(() => {
-        loadUser()
-        // eslint-disable-next-line
-      }, [])
-    return (
-        <>{ 
-            isAuthencated ? (
-            <div  className="app-container">
-                <div className='one'>                        
-                    <FileForm />  
-                </div>
-                <div className= 'two'>
-                    <Pagination />
-                </div>
-                   
-            </div>) : history.push('/login')
+import React from 'react';
+import { withRouter, Redirect } from 'react-router-dom';
+// import { Grid, Card, Fab } from '@material-ui/core';
+// import EditIcon from '@material-ui/icons/Edit';
+import { useAuth } from '../auth/auth';
 
-            }
-        </>
-    )
+// import Pagination from '../filelist/Pagination';
+import FilesForm from '../files/FilesForm'
+
+
+
+const Home = (props) => {
+
+  const { username } = useAuth();    
+
+  if(!username) {
+    return <Redirect to="/login" />;
+  }
+
+  return (
+    <div className= 'two'>
+   <FilesForm />
+</div>
+  )
+
 }
+
+export default withRouter(Home);

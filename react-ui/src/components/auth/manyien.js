@@ -5,31 +5,15 @@ import { useAuth } from '../auth/auth';
 
 const FileForm = (props) => {
   const history = useHistory()  
-    const { username, authToken } = useAuth();
-    // console.log(authToken)    
+
   // Handle local errors
   const [gender, setGender] = useState('');
   const [age, setAge] = useState("");
   const [patientNumber, setPatientNumber] = useState("");
   const [patientName, setPatientName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [viralLoad, setViralLoad] = useState("");
   
-  if(!username) {
-    return <Redirect to="/login" />;
-  }
   
-  const sex = [
-      {
-          value: 'Male',
-          label: '♂ Male'
-      },
-      {
-          value: 'Female',
-          label: '♀️ Female'
-      }
-  ]
-
   const authenticate = async () => {    
     const basePath = '/api/create-file'; // server side path
     let url = basePath;
@@ -38,14 +22,14 @@ const FileForm = (props) => {
     const response = await fetch(url, {
       method: "POST",
       headers: {'content-type': 'application/json',
-                'x-auth-token': authToken },
+      'x-auth-token': localStorage.getItem('token')
+    },
       body: JSON.stringify({
             patientNumber, 
             patientName,          
             phoneNumber, 
             age,        
-            gender,
-            viralLoad})
+            gender})
     });
 
     const json = await response.json();
@@ -112,40 +96,23 @@ const FileForm = (props) => {
     onChange={(e)=>setAge(e.target.value)}
     />,
     <TextField
-    id="standard-select-currency"
-    select
-    label="Gender"
-    value={gender}    
-    helperText="Please select Gender"
-    onChange={(e)=>setGender(e.target.value)}
-    >
-     {
-         sex.map((option)=>(
-             <option key={option.value} value={option.value}>
-                {option.label}
-             </option>
-         ))
-     }   
-    </TextField>
-    ,
-    <TextField
     variant="outlined"
     required
     fullWidth
-    name="viralLoad"
-    label="Batch Number"
-    type="viralLoad"
-    id="viralLoad"
-    autoComplete="Batch-Number"
-    value={viralLoad} 
-    onChange={(e)=> setViralLoad(e.target.value)}
+    name="gender"
+    label="gender"
+    type="gender"
+    id="gender"
+    autoComplete="gender"
+    value={gender} 
+    onChange={(e)=>setGender(e.target.value)}
     />
     ,
     <Button
       variant='contained' 
       color='primary' 
       onClick={() => authenticate()}>
-      Save Patient
+      Register
     </Button>
   ]
  
@@ -183,4 +150,4 @@ const FileForm = (props) => {
 
 }
 
-export default withRouter(FileForm);
+export default withRouter(AuthForm);

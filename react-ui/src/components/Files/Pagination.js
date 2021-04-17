@@ -3,22 +3,16 @@ import React, { useContext, useState, useEffect, Fragment} from "react";
 import { Input, CustomInput, Col, Row, Button, Container, Card, CardText, CardBody, CardTitle } from 'reactstrap'
 import { useTable, useFilters, useGlobalFilter, useSortBy,useExpanded, usePagination, useAsyncDebounce } from 'react-table'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-import AuthContext from '../../context/authContext/authContext'
-import FileContext from '../../context/fileContext/FileContext'
+import { useAuth } from '../auth/auth';
+import axios from 'axios'
+import useFetch from '../util/APIFetch'
 import moment from 'moment'
 import {withRouter} from 'react-router-dom'
 
 
 
 // Define a default UI for filtering
-const Filter = ({ column }) => {
-    return (
-      <div style={{ marginTop: 5 }}>
-        {column.canFilter && column.render('Filter')}
-      </div>
-    );
-  };
+
 
 function GlobalFilter({
     preGlobalFilteredRows,
@@ -64,35 +58,6 @@ function DefaultColumnFilter({
     )
 }
 
-const SelectColumnFilter = ({
-    column: { filterValue, setFilter, preFilteredRows, id },
-  }) => {
-    const options = React.useMemo(() => {
-      const options = new Set();
-      preFilteredRows.forEach((row) => {
-        options.add(row.values[id]);
-      });
-      return [...options.values()];
-    }, [id, preFilteredRows]);
-  
-    return (
-      <CustomInput
-        id='custom-select'
-        type='select'
-        value={filterValue}
-        onChange={(e) => {
-          setFilter(e.target.value || undefined);
-        }}
-      >
-        <option value=''>All</option>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </CustomInput>
-    );
-  };
 
 function Table({ columns, data, renderRowSubComponent }) {
 
@@ -257,20 +222,11 @@ function Table({ columns, data, renderRowSubComponent }) {
         </div>    )
 }
 
-
-
-
-
-function FilterTableComponent(props) {
-    const context = React.useContext(FileContext)    
-    const { loading } = useContext(AuthContext)
-    const { files, fileFilter, searchFile, getFiles } = context
-    const { removeFile, edit_File, clearEdit, updateFile } = useContext(FileContext)
-  
-    useEffect(() => {
-        getFiles()
-    },[])
-
+function FilterTableComponent(props) {       
+   const { data, loading } = useFetch("/api/get_all_files", {}, "GET");
+    
+        
+  console.log(data)
     const renderRowSubComponent = (row) => {
         const {  
           _id,       
@@ -284,8 +240,8 @@ function FilterTableComponent(props) {
           isBooked
         } = row.original;
         const handleRemove = () => {
-          removeFile(_id)
-          clearEdit()
+        //   removeFile(_id)
+        //   clearEdit()
         }  
       
         
@@ -361,7 +317,7 @@ function FilterTableComponent(props) {
     
 
     return (
-        <Table columns={columns} data={files} renderRowSubComponent={renderRowSubComponent} />
+        <Table columns={columns} data={data} renderRowSubComponent={renderRowSubComponent} />
     )
 }
 
