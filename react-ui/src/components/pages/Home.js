@@ -11,7 +11,7 @@ import FilesForm from '../files/FilesForm'
 
 const Home = (props) => {
 
-  const { username } = useAuth();    
+  const { username } = useAuth();   
 
   if(!username) {
     return <Redirect to="/login" />;
@@ -19,10 +19,10 @@ const Home = (props) => {
 
   return (
     <div className= 'two'>
-   <FilesForm />
-</div>
+      <FilesForm />
+    </div>
   )
 
 }
 
-export default withRouter(Home);
+export default Home;

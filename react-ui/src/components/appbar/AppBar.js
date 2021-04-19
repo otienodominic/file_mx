@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { MoreVert } from '@material-ui/icons';
-import { Menu, MenuItem, AppBar, Toolbar, IconButton, Typography } from '@material-ui/core';
+import { Menu, MenuItem, AppBar, Toolbar, IconButton, Typography, Button, Grid } from '@material-ui/core';
 import { useAuth } from '../auth/auth';
 
 const CustomAppBar = () => {
@@ -27,29 +27,24 @@ const CustomAppBar = () => {
   }
 
   return (
-    <AppBar position="static">
-      {username ? 
-      <Menu 
-        id="menu" 
-        anchorEl={menuAnchor} 
-        keepMounted 
-        open={shouldOpenMenu} 
-        onClose={() => closeMenu()}>
-          <MenuItem onClick={() => closeMenu()}>
-            <Link to="/" style={{textDecoration: 'none', color: '#000'}}>Home</Link>
-          </MenuItem>
-          <MenuItem onClick={() => logout()}>
-            <Link to="/" style={{textDecoration: 'none', color: '#000'}}>Logout</Link>
-          </MenuItem>
-        </Menu> : null}
-        <Toolbar>
-          {username ? <IconButton edge="start" color='inherit' onClick={e => openMenu(e)}>
-            <MoreVert />
-          </IconButton> : null}
-          <Typography variant="h6">
-            Patient Appointment
-          </Typography>
+    <AppBar position="static">  
+        <Toolbar>         
+          <Grid justify='space-between' container spacing={24}>
+            <Grid item>
+              <Typography variant="h6">
+                Patient Appointment
+              </Typography>
+
+            </Grid>
+            {
+              username ? <Grid item>
+                <Button color="inherit" onClick={()=>logout()} >Logout</Button>
+            </Grid> : null
+            }
+                        
+          </Grid>
         </Toolbar>
+
     </AppBar>
   )
 }

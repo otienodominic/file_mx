@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import './App.css';
 import Login from './components/auth/Login';
+import Landing from './components/auth/Landing'
 import Register from './components/auth/Register';
 import HomePage from './components/pages/Home';
 import { AuthContext } from './components/auth/auth';
@@ -42,7 +43,7 @@ function App() {
         <Router>
           <CustomAppBar/>
           <Switch>
-            {/* <Route exact path="/" component={AuthForm} /> */}
+            <Route exact path="/" component={Landing} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/signup" component={Register} />
             <PrivateRoute exact path="/home" component={HomePage} />            

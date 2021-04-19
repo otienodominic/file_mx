@@ -44,9 +44,9 @@ const AuthForm = (props) => {
       value={password}
       onChange={(e) => setPassword(e.target.value)} />,
     <Button
-      variant='contained' 
+      variant='contained'  
       color='primary' 
-      onClick={() => authenticate()}>Login      
+      onClick={() => authenticate()}> Login     
     </Button>
   ]
 
